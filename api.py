@@ -78,9 +78,11 @@ class Project:
 
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get("PORT", 8080))  # Fallback for local
     workerThread = threading.Thread(target=worker, name="Worker")
     janitorThread = threading.Thread(target=janitor, name="Janitor")
     workerThread.start()
     janitorThread.start()
-    serve(app, port=sys.argv[1])
-    #app.run(debug=True,port='8080')
+    serve(app, port=port)
+
